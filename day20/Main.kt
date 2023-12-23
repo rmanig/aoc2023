@@ -109,32 +109,9 @@ fun main() {
     }
 
     println("part one: $partOne")
-    println("part two: ${lcm(cycleCounters.values.toList())}")
+    println("part two: ${cycleCounters.values.fold(1L) {acc, l -> acc * l}}")
 }
 
 enum class ModuleType { Broadcast, Conjunction, FlipFlop }
 
 data class Signal(val pulse: Boolean, val sender: String, val receiver: String)
-
-fun gcd(a: Long, b: Long) : Long {
-    var a = a
-    var b = b
-    while (b > 0) {
-        val temp = b
-        b = a % b
-        a = temp
-    }
-    return a
-}
-
-fun lcm(a: Long, b: Long) : Long {
-    return a * (b / gcd(a, b))
-}
-
-fun lcm(input: List<Long>) : Long {
-    var result = input[0]
-    for (i in (1..<input.size)) {
-        result = lcm(result, input[i])
-    }
-    return result
-}
